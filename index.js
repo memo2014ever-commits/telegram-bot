@@ -1,13 +1,13 @@
 const { Telegraf } = require('telegraf');
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+// كتبنا التوكن هنا بشكل مباشر
+const bot = new Telegraf('8245297945:AAEi_075c3ajEBydw6qAMb-A1D7KP63a6CM');
 
 bot.start((ctx) => ctx.reply('أهلاً بك! البوت شغال تمام على Vercel 🚀'));
 bot.on('text', (ctx) => ctx.reply(`وصلتني رسالتك: ${ctx.message.text}`));
 
 module.exports = async (req, res) => {
   try {
-    // التأكد من استلام البيانات بشكل صحيح
     let body = req.body;
     if (typeof body === 'string') {
       body = JSON.parse(body);
@@ -20,6 +20,6 @@ module.exports = async (req, res) => {
     res.status(200).send('OK');
   } catch (error) {
     console.error('Error handling update:', error);
-    res.status(200).send('OK'); // بنرجع 200 عشان تلجرام ما يفضلش يعيد إرسال الطلب
+    res.status(200).send('OK');
   }
 };
