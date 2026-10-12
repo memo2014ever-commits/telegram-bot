@@ -2,10 +2,13 @@ const { Telegraf } = require('telegraf');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-bot.start((ctx) => ctx.reply('أهلاً بك! البوت يعمل بنجاح 🎉'));
+// الرد على أمر /start
+bot.start((ctx) => ctx.reply('أهلاً بك! البوت شغال تمام على Vercel 🚀'));
 
-bot.on('text', (ctx) => ctx.reply(`انت كتبت: ${ctx.message.text}`));
+// الرد على أي رسالة نصية
+bot.on('text', (ctx) => ctx.reply(`وصلتني رسالتك: ${ctx.message.text}`));
 
+// دالة لمعالجة الطلبات من Vercel
 module.exports = async (req, res) => {
   try {
     if (req.method === 'POST') {
@@ -15,6 +18,7 @@ module.exports = async (req, res) => {
       res.status(200).send('Bot is running!');
     }
   } catch (error) {
+    console.error(error);
     res.status(500).send('Error');
   }
 };
